@@ -1,0 +1,30 @@
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: janus_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secure_password
+      MYSQL_DATABASE: janus_streams
+      MYSQL_USER: janus
+      MYSQL_PASSWORD: janus_secure_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - janus_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  janus_network:
+    driver: bridge
