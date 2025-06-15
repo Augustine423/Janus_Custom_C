@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS rtp_streams (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    stream_id INT UNIQUE,
+    source_ip VARCHAR(45),
+    source_port INT,
+    ssrc BIGINT,
+    first_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    packet_count BIGINT DEFAULT 0,
+    byte_count BIGINT DEFAULT 0,
+    active BOOLEAN DEFAULT TRUE
+);

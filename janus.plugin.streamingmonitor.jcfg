@@ -1,0 +1,7 @@
+[general]
+mysql_host = janus_mysql
+mysql_user = janus
+mysql_password = janus_secure_password
+mysql_database = janus_streams
+mysql_port = 3306
+rtp_listen_port = 5004
